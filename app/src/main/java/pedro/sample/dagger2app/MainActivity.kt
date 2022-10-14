@@ -6,9 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import pedro.sample.dagger2app.databinding.ActivityMainBinding
-import javax.inject.Inject
-
-//import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
