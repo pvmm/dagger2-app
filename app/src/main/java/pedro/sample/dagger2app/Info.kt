@@ -1,15 +1,38 @@
 package pedro.sample.dagger2app
 
 import dagger.Component
-import javax.inject.Inject
+import dagger.Module
+import dagger.Provides
 
 
-@Component
-interface MagicBox {
-    fun inject(app: MainActivity)
+@Module
+class BeginModule {
+    @Provides
+    fun sayHello(): Greeting {
+        return Greeting("friend!")
+    }
 }
 
 
-class Info @Inject constructor() {
-    val text = "Hello Dagger 2"
+@Module
+class FinishModule {
+    @Provides
+    fun sayGoodbye(): Farewell {
+        return Farewell("friend!")
+    }
+}
+
+
+class Greeting(name: String) {
+    val text = "Hello, $name"
+}
+
+class Farewell(name: String) {
+    val text = "Goodbye, $name"
+}
+
+
+@Component(modules = [BeginModule::class, FinishModule::class])
+interface EtiquetteComponent {
+    fun inject(app: MainActivity)
 }

@@ -11,7 +11,8 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject lateinit var info: Info
+    @Inject lateinit var utterance1: Greeting
+    @Inject lateinit var utterance2: Farewell
 
     private lateinit var binding: ActivityMainBinding
 
@@ -22,8 +23,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         setSupportActionBar(binding.toolbar)
 
-        DaggerMagicBox.create().inject(this)
-        binding.contentMain.textView.text = info.text
+        DaggerEtiquetteComponent.create().inject(this)
+        binding.contentMain.textView.text = "${utterance1.text}\n...\n${utterance2.text}"
 
         binding.fab.setOnClickListener { _ ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
