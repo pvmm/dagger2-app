@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import pedro.sample.dagger2app.databinding.ActivityMainBinding
+import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity() {
 
-//    @Inject lateinit var info = Info()
+    @Inject lateinit var info: Info
 
     private lateinit var binding: ActivityMainBinding
 
@@ -19,6 +21,9 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         setSupportActionBar(binding.toolbar)
+
+        DaggerMagicBox.create().inject(this)
+        binding.contentMain.textView.text = info.text
 
         binding.fab.setOnClickListener { _ ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
