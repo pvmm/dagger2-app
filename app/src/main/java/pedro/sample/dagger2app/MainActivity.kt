@@ -7,12 +7,14 @@ import android.view.Menu
 import android.view.MenuItem
 import pedro.sample.dagger2app.databinding.ActivityMainBinding
 import javax.inject.Inject
+import javax.inject.Named
 
 
 class MainActivity : AppCompatActivity() {
 
     @Inject lateinit var utterance1: Greeting
     @Inject lateinit var utterance2: Farewell
+    @Inject @field:Named(UNSPECIFIED) lateinit var utterance3: Greeting
 
     private lateinit var binding: ActivityMainBinding
 
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         DaggerEtiquetteComponent.create().inject(this)
-        binding.contentMain.textView.text = "${utterance1.text}\n...\n${utterance2.text}"
+        binding.contentMain.textView.text = "${utterance1.text} ${utterance3.text}\n...\n${utterance2.text}"
 
         binding.fab.setOnClickListener { _ ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

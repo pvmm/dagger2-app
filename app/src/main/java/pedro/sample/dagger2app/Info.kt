@@ -3,13 +3,22 @@ package pedro.sample.dagger2app
 import dagger.Component
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
+
+
+const val UNSPECIFIED = "Unspecified"
 
 
 @Module
-class BeginModule {
+open class BeginModule {
     @Provides
-    fun sayHello(): Greeting {
-        return Greeting("friend!")
+    open fun sayHello(): Greeting {
+        return Greeting("friend")
+    }
+
+    @Provides @Named(UNSPECIFIED)
+    fun sayHello2(): Greeting {
+        return Greeting("stranger")
     }
 }
 
@@ -18,17 +27,18 @@ class BeginModule {
 class FinishModule {
     @Provides
     fun sayGoodbye(): Farewell {
-        return Farewell("friend!")
+        return Farewell("friend")
     }
 }
 
 
-class Greeting(name: String) {
-    val text = "Hello, $name"
+open class Greeting(name: String) {
+    val text = "Hello, $name!"
 }
 
+
 class Farewell(name: String) {
-    val text = "Goodbye, $name"
+    val text = "Goodbye, $name!"
 }
 
 
